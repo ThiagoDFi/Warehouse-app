@@ -12,12 +12,14 @@ class WarehousesController < ApplicationController
   def create
   # Recebe os dados enviados
   # Cria um novo galpão no banco de dados
-  warehouse_params = params.require(:warehouse).permit(:name, :code, :city, :description,
+    warehouse_params = params.require(:warehouse).permit(:name, :code, :city, :description,
                                                        :address, :cep, :area)
-  w = Warehouse.new(warehouse_params)
-  w.save()
+    w = Warehouse.new(warehouse_params)
+    w.save()
 
   #Redireciona par a tela inicial
+
+    flash[:notice] = "Galpão cadastrado com sucesso!"
     redirect_to root_path
   end
 end

@@ -16,12 +16,12 @@ describe 'Usuário visita fornecedores ' do
   it 'e ve fornecedores cadastrados' do 
 
     #Arrenge
-    Supplier.create!(corporate_name: 'TDF LTDA', brand_name: 'TDF', registration_number: '45625874',
+    Supplier.create!(corporate_name: 'TDF LTDA', brand_name: 'TDF', registration_number: '1215478459632',
                       full_address: 'rua do teste, 100', city: 'Barueri', state: 'SP',
-                      email: 'thiagoteste@gmail.com')
-    Supplier.create!(corporate_name: 'Centauro esportes', brand_name: 'Centauro', registration_number: '87452369',
+                      email: 'thiagoteste@gmail.com', phone_number: 11987452587)
+    Supplier.create!(corporate_name: 'Centauro esportes', brand_name: 'Centauro', registration_number: '9874514784578',
                       full_address: 'rua dos atletas, 800', city: 'Rio de Janeiro', state: 'RJ',
-                      email: 'centauroteste@gmail.com')
+                      email: 'centauroteste@gmail.com', phone_number: 21996541258)
 
     #Act
     visit root_path

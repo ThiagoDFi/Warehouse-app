@@ -13,7 +13,7 @@
       <% @suppliers.each do |supplier|%>
 
       <tr>
-        <td><%=supplier.brand_name%> </td>
+        <td><%= link_to supplier.brand_name, supplier%> </td>
         <td><%=supplier.city%> - <%=supplier.state%> </td>
       </tr>
       <% end %>

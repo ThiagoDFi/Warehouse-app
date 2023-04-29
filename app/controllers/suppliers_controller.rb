@@ -6,6 +6,7 @@ class SuppliersController < ApplicationController
 
   def show
     @supplier = Supplier.find(params[:id])
+    @product_model = ProductModel.where(supplier_id: @supplier.id)
   end
 
   def new

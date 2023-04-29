@@ -10,10 +10,28 @@
   <strong>Telefone: </strong><%= @supplier.phone_number%> </br>
 </div>
 
-<div>
-  <%= link_to 'Editar', edit_supplier_path%>
-</div>
+<% if @product_model.any?%>
 
-<div>
+<h2>Produtos do Fornecedor <%= @supplier.brand_name %></h2>
+  <div>
+      <% @product_model.each do |pm| %>
+        <dl>
+          <dt>Nome: </dt>
+          <dd><%= pm.name %></dd>
+          <dt>SKU: </dt>
+          <dd><%= pm.sku %></dd>
+          <dt>Dimensão: </dt>
+          <dd><%= pm.height%>cm x <%= pm.width%>cm x <%= pm.depth%>cm</dd>
+          <dt>Peso: </dt>
+          <dd><%= pm.weight%>g</dd>
+        </dl>
+      <% end %>
+  </div>
+<% else %>
+  <div>
+    <p>Nenhum produto deste fornecedor cadastrado
+  </div>
+<% end %>
+
+  <%= link_to 'Editar', edit_supplier_path%> |
   <%= link_to 'Voltar', root_path %>
-</div>

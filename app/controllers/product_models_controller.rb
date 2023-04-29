@@ -17,7 +17,8 @@ class ProductModelsController < ApplicationController
     if @product_model.save
       redirect_to @product_model, notice: "Modelo de produto cadsatrado com sucesso!"
     else
-      flash.now[:notice] = "Não foi possivel cadastrar seu modelo de produto"
+      @suppliers = Supplier.all
+      flash.now[:notice] = 'Não foi possivel cadastrar o modelo de produto'
       render 'new'
     end
   end

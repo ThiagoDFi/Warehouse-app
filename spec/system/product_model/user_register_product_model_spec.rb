@@ -10,6 +10,12 @@ describe 'Usuario cadastra um modelo de produto' do
                                 full_address: 'Av dos testes, 1000', city: 'São Paulo', 
                                 state: 'SP', email: 'sac@samsung.com.br',
                                 phone_number: 11954852036)
+    other_supplier = Supplier.create!(brand_name: 'LG', 
+                                corporate_name: 'LG do Brasil LTDA',
+                                registration_number: '4784125485698', 
+                                full_address: 'Av das empresas, 600', city: 'São Paulo', 
+                                state: 'SP', email: 'contato@lg.com.br',
+                                phone_number: 11954784125)
 
     #Act
     visit root_path
@@ -31,5 +37,24 @@ describe 'Usuario cadastra um modelo de produto' do
     expect(page).to have_content 'SKU: TV40_SAMS-DTF456'
     expect(page).to have_content 'Dimensão: 60cm x 90cm x 10cm'
     expect(page).to have_content 'Peso: 10000g'
+  end
+
+  it 'deve preencher todos os campos' do 
+    supplier = Supplier.create!(brand_name: 'Samsung', 
+                                corporate_name: 'Sansung Eletronicos LTDA',
+                                registration_number: '5478412598745', 
+                                full_address: 'Av dos testes, 1000', city: 'São Paulo', 
+                                state: 'SP', email: 'sac@samsung.com.br',
+                                phone_number: 11954852036)
+    #Act
+    visit root_path
+    click_on 'Modelos de Produtos'
+    click_on 'Cadastrar Novo'
+    fill_in 'Nome', with: ''
+    fill_in 'Peso', with: ''
+    click_on 'Enviar'
+
+    #Assert
+    expect(page).to have_content 'Não foi possivel cadastrar o modelo de produto'
   end
 end

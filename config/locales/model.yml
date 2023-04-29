@@ -22,9 +22,3 @@ pt-BR:
         state: "Estado"
         email: "E-mail"
         phone_number: "Telefone"
-      product_model:
-        name: "Nome"
-        weight: "Peso"
-        width: "Largura"
-        height: "Altura"
-        depth: "Comprimento"

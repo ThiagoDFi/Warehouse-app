@@ -3,37 +3,37 @@
 <%= form_with(model: @product_model) do |f| %>
 
   <div>
-    <%= f.label :name, "Nome" %>
+    <%= f.label :name%>
     <%= f.text_field :name %>
   </div>
 
   <div>
-    <%= f.label :weight, "Peso"%>
+    <%= f.label :weight%>
     <%= f.number_field :weight %>
   </div>
 
     <div>
-    <%= f.label :height, "Altura"%>
+    <%= f.label :height%>
     <%= f.number_field :height %>
   </div>
 
   <div>
-    <%= f.label :width, "Largura"%>
+    <%= f.label :width%>
     <%= f.number_field :width %>
   </div>
 
   <div>
-    <%= f.label :depth, "Comprimento"%>
+    <%= f.label :depth%>
     <%= f.number_field :depth %>
   </div>
 
   <div>
-    <%= f.label :sku, "SKU"%>
+    <%= f.label :sku%>
     <%= f.text_field :sku %>
   </div>
 
   <div> 
-    <%= f.label :supplier_id, "Fornecedor"%>
+    <%= f.label :supplier_id%>
     <%= f.collection_select :supplier_id, @suppliers, :id, :brand_name%>
   </div>
 

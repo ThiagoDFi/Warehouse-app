@@ -10,3 +10,4 @@ pt-BR:
         height: "Altura"
         depth: "Comprimento"
         supplier_id: "Fornecedor"
+        sku: "SKU"

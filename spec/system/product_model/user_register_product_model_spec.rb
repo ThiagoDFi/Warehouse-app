@@ -4,6 +4,7 @@ describe 'Usuario cadastra um modelo de produto' do
   it 'com sucesso' do
 
     #Arrenge
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
     supplier = Supplier.create!(brand_name: 'Samsung', 
                                 corporate_name: 'Sansung Eletronicos LTDA',
                                 registration_number: '5478412598745', 
@@ -18,6 +19,7 @@ describe 'Usuario cadastra um modelo de produto' do
                                 phone_number: 11954784125)
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'
@@ -39,7 +41,9 @@ describe 'Usuario cadastra um modelo de produto' do
     expect(page).to have_content 'Peso: 10000g'
   end
 
-  it 'deve preencher todos os campos' do 
+  it 'deve preencher todos os campos' do
+    #Arrange
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
     supplier = Supplier.create!(brand_name: 'Samsung', 
                                 corporate_name: 'Sansung Eletronicos LTDA',
                                 registration_number: '5478412598745', 
@@ -47,6 +51,7 @@ describe 'Usuario cadastra um modelo de produto' do
                                 state: 'SP', email: 'sac@samsung.com.br',
                                 phone_number: 11954852036)
     #Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'

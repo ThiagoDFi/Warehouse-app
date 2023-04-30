@@ -4,8 +4,10 @@ describe 'Usuário visita fornecedores ' do
   it 'e ve a pagina de fornecedores' do
 
     #Arrange
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
 
@@ -16,6 +18,7 @@ describe 'Usuário visita fornecedores ' do
   it 'e ve fornecedores cadastrados' do 
 
     #Arrenge
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
     Supplier.create!(corporate_name: 'TDF LTDA', brand_name: 'TDF', registration_number: '1215478459632',
                       full_address: 'rua do teste, 100', city: 'Barueri', state: 'SP',
                       email: 'thiagoteste@gmail.com', phone_number: 11987452587)
@@ -24,6 +27,7 @@ describe 'Usuário visita fornecedores ' do
                       email: 'centauroteste@gmail.com', phone_number: 21996541258)
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
 
@@ -38,8 +42,10 @@ describe 'Usuário visita fornecedores ' do
   it 'e não existe fornecedor cadastrado' do
 
     #Arrange
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
 
@@ -50,8 +56,10 @@ describe 'Usuário visita fornecedores ' do
   it 'e volta para a home page' do
 
   #Arrange
+  user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
 
   #Act
+  login_as(user)
   visit root_path
   click_on 'Fornecedores'
   click_on 'Voltar'

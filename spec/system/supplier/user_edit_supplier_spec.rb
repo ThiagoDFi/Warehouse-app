@@ -4,11 +4,13 @@ describe 'Usuario edita um fornecedor' do
   it 'a partir da tela de detalhes' do
 
     #Arrange
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
     Supplier.create!(corporate_name: 'Samsung Electronics Company LTDA', brand_name: 'Samsung', 
                      registration_number: '2154847823547', full_address: 'Rua dos eletronicos, 1000', 
                      city: 'São Paulo', state: 'SP', email: 'samsung@tecnologia.com', 
                      phone_number: '11978451234')
     #Act
+    login_as(user)
      visit root_path
      click_on 'Fornecedores'
      click_on 'Samsung'
@@ -29,11 +31,13 @@ describe 'Usuario edita um fornecedor' do
   it 'com sucesso' do
 
     #Arrange
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
     Supplier.create!(corporate_name: 'Samsung Electronics Company LTDA', brand_name: 'Samsung', 
                      registration_number: '2154847823547', full_address: 'Rua dos eletronicos, 1000', 
                      city: 'São Paulo', state: 'SP', email: 'samsung@tecnologia.com', 
                      phone_number: '11978451234')
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Samsung'
@@ -60,12 +64,14 @@ describe 'Usuario edita um fornecedor' do
   it 'e mantem os dados obrigatorios' do
     
     #Arrenge
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
     Supplier.create!(corporate_name: 'LG tecnologia', brand_name: 'LG', 
                      registration_number: '1548965325487', full_address: 'Rua das tvs, 500', 
                      city: 'Rio de Janeiro', state: 'RJ', email: 'lg@tecnologia.com', 
                      phone_number: '219548745236')
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'LG'

@@ -4,11 +4,13 @@ describe 'Usuário remove um galpão' do
   it 'com sucesso' do
 
     #Arrenge
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
     w = Warehouse.create!(name: 'Cuiaba', code: 'CWB', city: 'Cuiabá', area: 40_000,
     address: 'Avenida colorida, 1500', cep: '56000-000',
     description: 'Galpão no centro do país')
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Cuiaba'
     click_on 'Remover'
@@ -22,6 +24,7 @@ describe 'Usuário remove um galpão' do
 
   it 'e não apaga outros galpões' do
     #Arrenge
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
     first_warehouse = Warehouse.create!(name: 'Cuiaba', code: 'CWB', city: 'Cuiabá', area: 40_000,
                                         address: 'Avenida colorida, 1500', cep: '56000-000',
                                         description: 'Galpão no centro do país')
@@ -29,6 +32,7 @@ describe 'Usuário remove um galpão' do
                                         address: 'Avenida dos mineiros, 1500', cep: '46000-000',
                                         description: 'Galpão para cargas mineiras')
     #Act
+    login_as(user)
     visit root_path
     click_on 'Cuiaba'
     click_on 'Remover'

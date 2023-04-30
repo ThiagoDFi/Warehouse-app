@@ -7,7 +7,7 @@ describe 'Usuário se autentifica' do
     User.create!(email: 'joao@email.com', password: 'password')
 
     #Act
-    visit root_path 
+    visit root_path
     click_on 'Entrar'
     within('form') do
     fill_in 'E-mail', with: 'joao@email.com'

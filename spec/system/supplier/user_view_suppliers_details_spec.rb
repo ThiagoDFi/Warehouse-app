@@ -4,12 +4,14 @@ describe 'Usuário entra em um Fornecedor' do
   it 'e ve detalhes adicionais do fornecerdor' do
 
     #Arrange
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
     Supplier.create!(corporate_name: 'Grafite e Tinta', brand_name: 'Grafites', 
                       registration_number: '2154841023547', full_address: 'Rua das validações, 400', 
                       city: 'Barueri', state: 'SP', email: 'tinta@tecnologia.com', 
                       phone_number: '11987452361')
 
     #Assert
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Grafites'
@@ -28,11 +30,13 @@ describe 'Usuário entra em um Fornecedor' do
   it 'e volta a tela inicial' do
 
     #arrange
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
     Supplier.create!(corporate_name: 'Grafite e Tinta', brand_name: 'Grafites', 
                      registration_number: '2154841023547', full_address: 'Rua das validações, 400', 
                      city: 'Barueri', state: 'SP', email: 'tinta@tecnologia.com', 
                      phone_number: '11987452361')
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Grafites'

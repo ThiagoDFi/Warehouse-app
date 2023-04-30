@@ -4,8 +4,10 @@ describe 'Usuario cadastra um fornecedor' do
   it 'a partir da tela inicial' do 
     
     #Arrange
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Cadastrar fornecedor'
@@ -24,8 +26,10 @@ describe 'Usuario cadastra um fornecedor' do
   it 'com sucesso' do
 
     #Arrange
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Cadastrar fornecedor'
@@ -49,8 +53,10 @@ describe 'Usuario cadastra um fornecedor' do
   it 'com dados incompletos' do
 
     #Arrange
+    user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
 
     #Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Cadastrar fornecedor'

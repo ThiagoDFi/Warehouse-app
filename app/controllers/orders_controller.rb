@@ -11,8 +11,13 @@ class OrdersController < ApplicationController
                                                  :estimated_delivery_date)
     @order = Order.new(order_params)
     @order.user = current_user
-    @order.save
+    if @order.save
     redirect_to @order, notice: "Pedido registrado com sucesso."
+    else
+      @warehouses = Warehouse.all
+      @suppliers = Supplier.all
+      render "new"
+    end
   end
 
   def show

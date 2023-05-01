@@ -32,6 +32,7 @@ describe 'Usuário cadastra um pedido' do
                                 registration_number: '2154847823547', full_address: 'Rua dos eletronicos, 1000', 
                                 city: 'São Paulo', state: 'SP', email: 'samsung@tecnologia.com', 
                                 phone_number: '11978451234')
+    allow(SecureRandom).to receive(:alphanumeric).and_return('ABC12345')
     #Act
     login_as(user)
     visit root_path
@@ -43,6 +44,7 @@ describe 'Usuário cadastra um pedido' do
 
     #Assert
     expect(page).to have_content 'Pedido registrado com sucesso.'
+    expect(page).to have_content 'Pedido ABC12345'
     expect(page).to have_content 'Galpão Destino: GRU | Aeroporto SP'
     expect(page).to have_content 'Fornecedor: LG Tecnologia'
     expect(page).to have_content 'Usuário Responsável: Thiago - thiago@email.com'

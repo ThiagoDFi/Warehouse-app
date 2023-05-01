@@ -1,7 +1,7 @@
 pt-BR:
   activerecord:
     models:
-      user: Pedido
+      order: Pedido
     attributes:
       order:
         warehouse_id: "Galpão Destino"

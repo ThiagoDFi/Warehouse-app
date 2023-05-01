@@ -23,4 +23,37 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
   end
+
+  def index
+    @orders = Order.all
+  end
+
+  def edit
+    @order = Order.find(params[:id])
+    @warehouses = Warehouse.all
+    @suppliers = Supplier.all
+    if @order.user != current_user
+      flash[:notice] = "Você não tem permissão para editar este pedido."
+      redirect_to root_path
+    end
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    order_params = params.require(:order).permit(:warehouse, :supplier, :user, 
+                                                 :estimated_delivery_date)
+    if @order.user != current_user
+      flash[:notice] = "Você não tem permissão para editar este pedido."
+      redirect_to root_path
+    else
+      if @order.update(order_params)
+        redirect_to order_path(params[:id]), notice: "Pedido atualizado com sucesso."
+      else
+        @warehouses = Warehouse.all
+        @suppliers = Supplier.all
+        flash.now[:notice] = "Não foi possivel atualizar o pedido."
+        render "edit"
+      end
+    end                            
+  end
 end

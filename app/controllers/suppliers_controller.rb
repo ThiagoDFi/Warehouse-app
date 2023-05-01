@@ -37,7 +37,7 @@ class SuppliersController < ApplicationController
                                                        :city, :state, :email, :phone_number)
     if @supplier.update(supplier_params) 
     redirect_to supplier_path(params[:id]), notice: "Fornecedor atualizado com sucesso!"
-    else 
+    else
       flash.now[:notice] = "Não foi possivel atualizar o fornecedor"
       render "edit"
     end

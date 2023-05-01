@@ -35,4 +35,13 @@ RSpec.describe ProductModel, type: :model do
       expect(result).to eq false
     end
   end
+  describe '#dimension' do
+    it 'exibe a dimensão do produto' do
+      p = ProductModel.new(width: 70, height: 45, depth: 10)
+
+      result = p.dimension
+
+      expect(result).to eq('45cm x 70cm x 10cm')
+    end
+  end
 end

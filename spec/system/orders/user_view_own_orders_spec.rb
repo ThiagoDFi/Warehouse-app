@@ -28,13 +28,13 @@ describe 'Usuário ve seus próprios pedidos' do
                                   phone_number: '219548745236')
 
     first_order = Order.create!(user: user, warehouse: warehouse, supplier: supplier, 
-                                  estimated_delivery_date: 1.day.from_now)
+                                  estimated_delivery_date: 1.day.from_now, status: 'pending')
 
     second_order = Order.create!(user: other_user, warehouse: warehouse, supplier: supplier, 
-                                  estimated_delivery_date: 1.day.from_now)
+                                  estimated_delivery_date: 1.day.from_now, status: 'delivered')
 
     third_order = Order.create!(user: user, warehouse: warehouse, supplier: supplier, 
-                                estimated_delivery_date: 1.week.from_now)
+                                estimated_delivery_date: 1.week.from_now, status: 'canceled')
 
     #Act
     login_as(user)
@@ -43,8 +43,11 @@ describe 'Usuário ve seus próprios pedidos' do
 
     #Assert
     expect(page).to have_content first_order.code
+    expect(page).to have_content 'Pendente'
     expect(page).not_to have_content second_order.code
+    expect(page).not_to have_content 'Entregue'
     expect(page).to have_content third_order.code
+    expect(page).to have_content 'Cancelado'
   end
 
   it 'e visita pedido' do

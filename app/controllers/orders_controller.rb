@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
 
+  before_action :set_order_check_user, only: [:show, :edit, :update]
+
   def new
     @order = Order.new
     @warehouses = Warehouse.all
@@ -22,7 +24,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
   end
 
   def index
@@ -30,23 +31,14 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @order = Order.find(params[:id])
     @warehouses = Warehouse.all
     @suppliers = Supplier.all
-    if @order.user != current_user
-      flash[:notice] = "Você não tem permissão para editar este pedido."
-      redirect_to root_path
-    end
   end
 
   def update
     @order = Order.find(params[:id])
-    order_params = params.require(:order).permit(:warehouse, :supplier, :user, 
+    order_params = params.require(:order).permit(:warehouse_id, :supplier_id, :user_id, 
                                                  :estimated_delivery_date)
-    if @order.user != current_user
-      flash[:notice] = "Você não tem permissão para editar este pedido."
-      redirect_to root_path
-    else
       if @order.update(order_params)
         redirect_to order_path(params[:id]), notice: "Pedido atualizado com sucesso."
       else
@@ -54,13 +46,22 @@ class OrdersController < ApplicationController
         @suppliers = Supplier.all
         flash.now[:notice] = "Não foi possivel atualizar o pedido."
         render "edit"
-      end
-    end                            
+      end                            
   end
 
   def search
     @code = params["query"]
     # @order = Order.find_by(code: params["query"])
     @orders = Order.where("code LIKE ?", "%#{@code}%")
+  end
+
+  private
+
+  def set_order_check_user
+    @order = Order.find(params[:id])
+    if @order.user != current_user
+      flash[:notice] = "Você não possui acesso a este pedido."
+      redirect_to root_path
+    end
   end
 end

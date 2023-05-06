@@ -1,15 +1,7 @@
+<h1>Meus Pedidos</h1>
 
-<h1>Pedidos</h1>
+<% @orders.each do |order| %>
 
-<% @orders.each do |odr| %>
-
-<dl>
-  <dt>Pedido no Galpão: </dt>
-  <dd><%= link_to odr.warehouse.name, odr %> </dd>
-</dl>
+  <%= render order %>
 
 <% end %>
-  <% if @orders.empty? %>
-    <p>Não existem galpões cadastrados</p>
-<% end %>
-

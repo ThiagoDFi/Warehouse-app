@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+
   def new
     @order = Order.new
     @warehouses = Warehouse.all
@@ -25,7 +26,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = current_user.orders
   end
 
   def edit

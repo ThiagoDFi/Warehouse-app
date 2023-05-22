@@ -44,6 +44,5 @@ describe 'Usuário se autentifica' do
     expect(page).to have_content 'Entrar'
     expect(page).not_to have_button 'Sair'
     expect(page).not_to have_content 'joao@email.com'
-
   end
 end

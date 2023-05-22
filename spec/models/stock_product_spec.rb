@@ -59,5 +59,59 @@ RSpec.describe StockProduct, type: :model do
       #assert
       expect(stock_product.serial_number).to eq original_serial_number
     end
+  end
+  describe '#available?' do
+    it 'true se não tiver destino' do
+      #Arrange
+      user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
+
+      warehouse = Warehouse.create!(name: 'Galpão do Santos', code: 'RIO', address: 'Endereço', 
+                                    cep: '25000-000', city: 'Rio', area: 1000,
+                                    description: 'Alguma descrição')
+
+      supplier = Supplier.create!(corporate_name: 'LG Tecnologia', brand_name: 'LG', 
+                                  registration_number: '1548965325487', 
+                                  full_address: 'Rua das tvs, 500', city: 'Rio de Janeiro',
+                                  state: 'RJ', email: 'lg@tecnologia.com', 
+                                  phone_number: '219548745236')
+      order = Order.create!(user: user, warehouse: warehouse, supplier: supplier, 
+                        estimated_delivery_date: 1.week.from_now, status: :delivered)
+      
+      product = ProductModel.create!(name: ' Cadeira gamer', weight: 5, height: 10, width: 80,
+                                     depth: 80, sku: 'CGAMER-BOX-84373', supplier: supplier)
+
+      #Act
+      stock_product = StockProduct.create!(order: order, warehouse: warehouse, product_model: product)
+
+
+      #Assert
+      expect(stock_product.avaiable?).to eq true
     end
+    it 'false se tiver destino' do
+      #Arrange
+      user = User.create!(name:'Thiago', email: 'thiago@email.com', password: 'password')
+
+      warehouse = Warehouse.create!(name: 'Galpão do Santos', code: 'RIO', address: 'Endereço', 
+                                    cep: '25000-000', city: 'Rio', area: 1000,
+                                    description: 'Alguma descrição')
+
+      supplier = Supplier.create!(corporate_name: 'LG Tecnologia', brand_name: 'LG', 
+                                  registration_number: '1548965325487', 
+                                  full_address: 'Rua das tvs, 500', city: 'Rio de Janeiro',
+                                  state: 'RJ', email: 'lg@tecnologia.com', 
+                                  phone_number: '219548745236')
+      order = Order.create!(user: user, warehouse: warehouse, supplier: supplier, 
+                        estimated_delivery_date: 1.week.from_now, status: :delivered)
+      
+      product = ProductModel.create!(name: ' Cadeira gamer', weight: 5, height: 10, width: 80,
+                                     depth: 80, sku: 'CGAMER-BOX-84373', supplier: supplier)
+
+      #Act
+      stock_product = StockProduct.create!(order: order, warehouse: warehouse, product_model: product)
+      stock_product.create_stock_product_destination!(recipient: "Thiago", address: "Rua do teste")
+
+      #Assert
+      expect(stock_product.avaiable?).to eq false
+    end
+  end
 end
